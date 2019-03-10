@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace MovieMania
-{
-	class Movie
+	{
+	public class Movie
 	{
 
 		private const String imagesUriBase = "https://image.tmdb.org/t/p/w185_and_h278_bestv2";
@@ -15,14 +15,19 @@ namespace MovieMania
 		{
 			get
 			{
-				if (genres.Count > 1)
+				if (genresList.Count > 0)
 				{
-					return genres[0];
+					return genresList[0];
 				}
-				else
-				{
-					return "undefinned";
-				}
+				return "umdefined";
+			}
+		}
+
+		public String genres
+		{
+			get
+			{
+		return String.Join(", ", genresList);
 			}
 		}
 
@@ -54,6 +59,8 @@ namespace MovieMania
 
 		public List<int> genre_ids { get; set; }
 
-		public List<String> genres { get; set; }
+		// public 
+
+		public List<String> genresList {get; set; }
 	}
 }

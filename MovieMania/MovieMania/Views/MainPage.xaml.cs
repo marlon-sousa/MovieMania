@@ -12,6 +12,7 @@ namespace MovieMania
 		public MainPage()
 		{
 			InitializeComponent();
+			lvMovies.ItemTapped += onMovieSelected;
 		}
 		
 		protected override async void OnAppearing()
@@ -21,6 +22,12 @@ namespace MovieMania
 				moviesViewModel = await MoviesViewModel.createAsync();
 				BindingContext = moviesViewModel;
 		}
+		}
+
+		private void onMovieSelected(object sender, ItemTappedEventArgs e)
+		{
+			MovieDetailsPage page = new MovieDetailsPage((Movie)e.Item);
+			Navigation.PushAsync(page);
 		}
 
 		private MoviesViewModel moviesViewModel = null;

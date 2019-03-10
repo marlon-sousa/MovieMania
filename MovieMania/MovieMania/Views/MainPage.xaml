@@ -7,7 +7,7 @@
 
 	<StackLayout
 	Orientation="Vertical">
-		<ListView ItemsSource="{Binding movies}"
+		<ListView x:Name="lvMovies" ItemsSource="{Binding movies}"
               CachingStrategy="RecycleElement"
               RowHeight="40">
 			<ListView.ItemTemplate>

@@ -17,19 +17,26 @@ namespace MovieMania
 
 		}
 
-public async Task<List<String>> getGenresFromIds(List<int> ids)
-{
-if (mustUpdateGenres())
-{
-				await updateGenres();
-}
-			List<String> genres = new List<string>();
-			foreach(int id in ids)
+		public async Task<List<String>> getGenresFromIds(List<int> ids)
+		{
+			if (mustUpdateGenres())
 			{
-				genres.Add(getGenre(id));
+				await updateGenres();
 			}
-			return genres;
-}
+			List<String> genres = new List<string>();
+			foreach (int id in ids)
+			{
+				if (_genres.ContainsKey(id))
+				{
+					genres.Add(_genres[id]);
+				}
+			}
+			if(genres.Count == 0)
+			{
+				genres.Add("undefined");
+			}
+				return genres;
+		}
 
 public String getGenre(int id)
 {

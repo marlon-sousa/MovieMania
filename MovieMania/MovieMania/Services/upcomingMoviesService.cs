@@ -29,7 +29,7 @@ namespace MovieMania
 		{
 		foreach(Movie movie in movies)
 		{
-				movie.genres = await _genreService.getGenresFromIds(movie.genre_ids);
+				movie.genresList = await _genreService.getGenresFromIds(movie.genre_ids);
 		}
 		}
 
