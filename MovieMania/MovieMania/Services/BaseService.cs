@@ -9,10 +9,15 @@ namespace MovieMania
 	class BaseService
 	{
 
-	public BaseService(HttpClient client, String baseUri)
+		private const String BASE_URL = "TMDB.BaseURL";
+
+	public BaseService(HttpClient client, String path)
 	{
-			this._restClient = new TinyRestClient(client, baseUri);
+
+			this._restClient = new TinyRestClient(client, $"{configManager.get(BASE_URL)}{configManager.get(path)}");
 	}
+	
+		private ConfigManager configManager = ((App)App.Current).configManager;
 
 		protected TinyRestClient _restClient;
 	}

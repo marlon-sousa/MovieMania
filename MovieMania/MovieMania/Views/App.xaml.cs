@@ -7,10 +7,14 @@ namespace MovieMania
 {
 	public partial class App : Application
 	{
+		public ConfigManager configManager { get; }
+
 		public App()
 		{
 			InitializeComponent();
 
+
+			configManager = ConfigManager.create();
 			MainPage = new NavigationPage(new MainPage());
 		}
 

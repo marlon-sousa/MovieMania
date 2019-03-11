@@ -1,6 +1,6 @@
 {
 	"TMDB.Key": "[your_key]",
-	"TMDB.BaseURL": "http://192.168.0.104/movies",
-	"TMDB.UpcomingUri": "/upcoming.json",
-	"TMDB.GenresUri": "/genres.json"
+	"TMDB.BaseURL": "https://api.themoviedb.org/3",
+	"TMDB.UpcomingUri": "/movie/upcoming",
+	"TMDB.GenresUri": "/genre/movie/list"
 }

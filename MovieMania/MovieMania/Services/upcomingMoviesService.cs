@@ -10,11 +10,11 @@ namespace MovieMania
 
 	class UpcomingMoviesService : BaseService
 	{
-	private const String baseUri = "http://192.168.0.104/movies";
+		private const String PATH = "TMDB.UpcomingURI";
 
-	public UpcomingMoviesService(HttpClient client): base(client, baseUri)
+	public UpcomingMoviesService(HttpClient client): base(client,  PATH)
 	{
-			this._genreService = new GenreService(client);
+			this._genreService = new GenreService(client); ;
 	}
 
 	public async Task<List<Movie>> getList()
@@ -32,7 +32,7 @@ namespace MovieMania
 				movie.genresList = await _genreService.getGenresFromIds(movie.genre_ids);
 		}
 		}
-
+	
 		private GenreService _genreService;
 
 		class UpcomingMovies

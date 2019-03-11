@@ -9,6 +9,22 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
 
+
+  <ItemGroup>
+    <Compile Remove="config\debug\**" />
+    <Compile Remove="config\release\**" />
+    <EmbeddedResource Remove="config\debug\**" />
+    <EmbeddedResource Remove="config\release\**" />
+    <None Remove="config\debug\**" />
+    <None Remove="config\release\**" />
+  </ItemGroup>
+
+<ItemGroup>
+    <EmbeddedResource Include="$(MSBuildProjectDirectory)/Config/$(Configuration)/config.json">
+        <LogicalName>ConfigManager.config.json</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+  
   <ItemGroup>
     <PackageReference Include="tiny.RestClient" Version="1.6.1" />
     <PackageReference Include="xamarin.forms" Version="3.6.0.220655" />

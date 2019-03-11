@@ -10,9 +10,9 @@ namespace MovieMania
 	class GenreService : BaseService
 	{
 
-		private const String baseUri = "http://192.168.0.104/movies";
+		private const String PATH = "TMDB.GenresURI";
 
-		public GenreService(HttpClient client) : base(client, baseUri)
+		public GenreService(HttpClient client) : base(client, PATH)
 		{
 
 		}
