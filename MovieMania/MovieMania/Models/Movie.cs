@@ -33,6 +33,7 @@ namespace MovieMania
 
 		public String title { get; set; }
 		public int id { get; set; }
+		public String overview { get; set; }
 		public string release_date { get; set; }
 		public String poster_path
 		{

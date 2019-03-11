@@ -19,7 +19,7 @@ namespace MovieMania
 
 	public async Task<List<Movie>> getList(int page)
 	{
-					UpcomingMovies movies = await _restClient.GetRequest(configManager.get(PATH))
+		UpcomingMovies movies = await _restClient.GetRequest(configManager.get(PATH))
 			.AddQueryParameter("api_key", configManager.get(API_KEY))
 			.AddQueryParameter("page", page)
 			.ExecuteAsync<UpcomingMovies>();
