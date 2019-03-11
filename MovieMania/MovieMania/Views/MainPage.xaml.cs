@@ -13,6 +13,7 @@ namespace MovieMania
 		{
 			InitializeComponent();
 			lvMovies.ItemTapped += onMovieSelected;
+			lvMovies.ItemAppearing += onItemAppearing;
 		}
 		
 		protected override async void OnAppearing()
@@ -28,6 +29,21 @@ namespace MovieMania
 		{
 			MovieDetailsPage page = new MovieDetailsPage((Movie)e.Item);
 			Navigation.PushAsync(page);
+		}
+
+		private async void onItemAppearing(object sender, ItemVisibilityEventArgs e)
+		{
+			if (shouldUpdate(((Movie)e.Item)))
+			{
+				await moviesViewModel.getNext();
+				System.Diagnostics.Debug.WriteLine("obtendo mais vinte itens");
+			}
+
+		}
+
+		private bool shouldUpdate(Movie movie)
+		{
+			return (!moviesViewModel.isLoading && moviesViewModel.count != 0 && moviesViewModel.isLast(movie));
 		}
 
 		private MoviesViewModel moviesViewModel = null;

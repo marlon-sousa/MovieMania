@@ -32,6 +32,7 @@ namespace MovieMania
 		}
 
 		public String title { get; set; }
+		public int id { get; set; }
 		public string release_date { get; set; }
 		public String poster_path
 		{
@@ -58,8 +59,6 @@ namespace MovieMania
 		}
 
 		public List<int> genre_ids { get; set; }
-
-		// public 
 
 		public List<String> genresList {get; set; }
 	}

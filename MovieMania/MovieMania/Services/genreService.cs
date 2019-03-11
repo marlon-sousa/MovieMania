@@ -12,7 +12,7 @@ namespace MovieMania
 
 		private const String PATH = "TMDB.GenresURI";
 
-		public GenreService(HttpClient client) : base(client, PATH)
+		public GenreService(HttpClient client) : base(client)
 		{
 
 		}
@@ -24,13 +24,13 @@ namespace MovieMania
 				await updateGenres();
 			}
 			List<String> genres = new List<string>();
-			foreach (int id in ids)
+			ids.ForEach(id =>
 			{
 				if (_genres.ContainsKey(id))
 				{
 					genres.Add(_genres[id]);
 				}
-			}
+			});
 			if(genres.Count == 0)
 			{
 				genres.Add("undefined");
@@ -68,12 +68,10 @@ private async Task updateGenres()
 					return;
 				}
 				Dictionary<int, String> d = new Dictionary<int, string>();
-				Genres genres = await _restClient.GetRequest("genres.json")
+				Genres genres = await _restClient.GetRequest(configManager.get(PATH))
+				.AddQueryParameter("api_key", configManager.get(API_KEY))
 					.ExecuteAsync<Genres>();
-				foreach (Genre g in genres.genres)
-					{
-					d[g.id] = g.name;
-				}
+				genres.genres.ForEach (g => d[g.id] = g.name );
 				_genres = d;
 				_dateTime = DateTime.Now;
 			}
@@ -85,7 +83,7 @@ private async Task updateGenres()
 
 private bool mustUpdateGenres()
 {
-			return (_dateTime == DateTime.MinValue|| (DateTime.Now.Subtract(_dateTime).TotalDays > 0));
+			return (_dateTime == DateTime.MinValue|| (DateTime.Now.Subtract(_dateTime).TotalDays >= 1));
 }
 
 		private static SemaphoreSlim semaphoreSlim = new SemaphoreSlim(1, 1);
