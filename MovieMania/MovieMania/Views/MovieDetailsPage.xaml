@@ -1,27 +1,28 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿		<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MovieMania.MovieDetailsPage">
     <ContentPage.Content>
-		<Grid Padding="5" >
+		<Grid Padding="5" 
+		Margin="5" >
 			<Grid.RowDefinitions>
-				<RowDefinition Height="10"></RowDefinition>
-				<RowDefinition Height="10"></RowDefinition>
-				<RowDefinition Height="10"></RowDefinition>
+				<RowDefinition Height="auto"></RowDefinition>
+				<RowDefinition Height="auto"></RowDefinition>
+				<RowDefinition Height="auto"></RowDefinition>
 				<RowDefinition Height="*"></RowDefinition>
-				<RowDefinition Height="10"></RowDefinition>
+				<RowDefinition Height="60"></RowDefinition>
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="auto"></ColumnDefinition>
 				<ColumnDefinition Width="*"></ColumnDefinition>
 			</Grid.ColumnDefinitions>
 			<Label Grid.Row="0" Grid.Column="0" Text="Title:" ></Label>
-			<Label Grid.Row="0" Grid.Column="1" Text="{Binding title}" ></Label>
+			<Label Grid.Row="0" Grid.Column="1" Text="{Binding title}" LineBreakMode="WordWrap" ></Label>
 			<Label Grid.Row="1" Grid.Column="0" Text="Genre:" ></Label>
 			<Label Grid.Row="1" Grid.Column="1" Text="{Binding genres}" ></Label>
 			<Label Grid.Row="2" Grid.Column="0" Text="Release date:" ></Label>
 			<Label Grid.Row="2" Grid.Column="1" Text="{Binding release_date}" ></Label>
-			<Image Grid.Row="3" Grid.ColumnSpan ="2" Grid.Column="0" Source="{Binding poster_path}" Aspect="AspectFill"/>
+			<Image Grid.Row="3" Grid.ColumnSpan ="2" Grid.Column="0" Source="{Binding poster_path}" Aspect="AspectFit"/>
 			<ScrollView Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2">
 				<Label Text="{Binding overview}" ></Label>
 			</ScrollView>
