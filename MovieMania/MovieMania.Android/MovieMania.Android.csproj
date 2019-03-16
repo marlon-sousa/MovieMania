@@ -49,6 +49,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="autofac">
+      <Version>4.9.1</Version>
+    </PackageReference>
     <PackageReference Include="tiny.RestClient">
       <Version>1.6.1</Version>
     </PackageReference>

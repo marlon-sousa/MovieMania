@@ -9,48 +9,71 @@ using Xamarin.Forms;
 
 namespace MovieMania
 {
-	class MoviesViewModel
+	class MoviesViewModel : IMoviesViewModel
 	{
+	/*
 		public static async Task<MoviesViewModel> createAsync()
 		{
 			MoviesViewModel moviesViewModel = new MoviesViewModel();
 			await moviesViewModel.getMovies();
 			return moviesViewModel;
 		}
+		*/
 
-		private MoviesViewModel()
+		public MoviesViewModel(IUpcomingMoviesService upcomingMovies)
 		{
-
+			this._upcomingMovies = upcomingMovies;
+			System.Diagnostics.Debug.WriteLine("MoviesViewModel created");
 		}
 
-		public async Task getMovies(int page = 1)
+		public async Task loadMoviesIfNeeded(Movie movie = null)
 		{
-			_isLoading = true;
-			try
+			if(shouldUpdate(movie))
 			{
-				List<Movie> listMovies = await upcomingMovies.getList(page);
-				listMovies.ForEach(m => _movies.Add(m) );
-				_page = page;
-			}
-			finally
-			{
-				_isLoading = false;
+			System.Diagnostics.Debug.WriteLine($"obtendo mais vinte itens. Página {nextPage()}");
+				try
+				{
+					int page = nextPage();
+					_isLoading = true;
+					List<Movie> listMovies = await _upcomingMovies.getList(page);
+					listMovies.ForEach(m => _movies.Add(m));
+					_page = page;
+				}
+				finally
+				{
+					_isLoading = false;
+				}
 			}
 		}
-
-		public async Task getNext()
-		{
-			await getMovies(++ _page);
-		}
-
+		
 		public bool isLast(Movie movie)
 		{
 		if(movies.Count ==0)
 		{
-		return true;
+			return true;
 		}
-			return (movie.id == _movies.Last().id);
+			return (null != movie && movie.id == _movies.Last().id);
 		}
+
+		private int nextPage()
+		{
+		if( count == 0)
+		{
+				return 1;
+		}
+			return (count / 20) + 1;
+		}
+
+		private bool shouldUpdate(Movie movie)
+		{
+		if(isLoading || nextPage() > _upcomingMovies.totalPages)
+		{
+				return false;
+		}
+
+			return isLast(movie);
+		}
+
 
 		public int count
 		{
@@ -78,7 +101,7 @@ namespace MovieMania
 		int _page = 0;
 		private ObservableCollection<Movie> _movies = new ObservableCollection<Movie>();
 		private bool _isLoading = false;
-		private static UpcomingMoviesService upcomingMovies = new UpcomingMoviesService(new HttpClient());
+		private IUpcomingMoviesService _upcomingMovies; // = new UpcomingMoviesService(new HttpClient());
 
 	}
 }

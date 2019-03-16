@@ -4,17 +4,23 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Tiny.RestClient;
 
 namespace MovieMania
 {
-	class GenreService : BaseService
+	class GenreService : IGenreService
 	{
 
 		private const String PATH = "TMDB.GenresURI";
 
-		public GenreService(HttpClient client) : base(client)
-		{
+		private const String API_KEY = "TMDB.Key";
 
+
+		public GenreService(TinyRestClient client, IConfigManager configManager) 
+		{
+			this._restClient = client;
+			this._configManager = configManager;
+			System.Diagnostics.Debug.WriteLine("GenreService created");
 		}
 
 		public async Task<List<String>> getGenresFromIds(List<int> ids)
@@ -67,9 +73,10 @@ private async Task updateGenres()
 					{ // someone else was updating while this thread was waiting
 					return;
 				}
+				System.Diagnostics.Debug.WriteLine("Updating Genres");
 				Dictionary<int, String> d = new Dictionary<int, string>();
-				Genres genres = await _restClient.GetRequest(configManager.get(PATH))
-				.AddQueryParameter("api_key", configManager.get(API_KEY))
+				Genres genres = await _restClient.GetRequest(_configManager.get(PATH))
+				.AddQueryParameter("api_key", _configManager.get(API_KEY))
 					.ExecuteAsync<Genres>();
 				genres.genres.ForEach (g => d[g.id] = g.name );
 				_genres = d;
@@ -89,6 +96,9 @@ private bool mustUpdateGenres()
 		private static SemaphoreSlim semaphoreSlim = new SemaphoreSlim(1, 1);
 		private static Dictionary<int, String> _genres = new Dictionary<int, string>();
 		private static DateTime _dateTime = DateTime.MinValue;
+
+		private TinyRestClient _restClient;
+		private IConfigManager _configManager;
 
 		class Genres
 		{

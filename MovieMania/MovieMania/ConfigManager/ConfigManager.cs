@@ -7,7 +7,7 @@ using System.Text;
 
 namespace MovieMania
 {
-	public class ConfigManager
+	public class ConfigManager : IConfigManager
 	{
 
 		public static ConfigManager create()
@@ -36,6 +36,7 @@ namespace MovieMania
 		private ConfigManager(Dictionary<string, string> configs)
 		{
 			_configs = configs;
+			System.Diagnostics.Debug.WriteLine("ConfigManager created");
 		}
 
 		public String get(String key, String defaultValue = "")

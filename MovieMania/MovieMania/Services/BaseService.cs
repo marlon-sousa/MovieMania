@@ -15,10 +15,10 @@ namespace MovieMania
 	public BaseService(HttpClient client)
 	{
 
-			this._restClient = new TinyRestClient(client, $"{configManager.get(BASE_URL)}");
+			this._restClient = new TinyRestClient(client, "aaa"); //  $"{configManager.get(BASE_URL)}");
 	}
-	
-		protected ConfigManager configManager = ((App)App.Current).configManager;
+
+		protected ConfigManager configManager = ConfigManager.create();
 
 		protected TinyRestClient _restClient;
 	}

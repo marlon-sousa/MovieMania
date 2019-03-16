@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Autofac;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,14 +16,16 @@ namespace MovieMania
 			lvMovies.ItemTapped += onMovieSelected;
 			lvMovies.ItemAppearing += onItemAppearing;
 		}
-		
+
 		protected override async void OnAppearing()
 		{
-		if(moviesViewModel == null)
-		{
-				moviesViewModel = await MoviesViewModel.createAsync();
-				BindingContext = moviesViewModel;
-		}
+			if (_moviesViewModel == null)
+			{
+				_moviesViewModel = App.Container.Resolve<IMoviesViewModel>();
+				BindingContext = _moviesViewModel;
+			}
+
+			await _moviesViewModel.loadMoviesIfNeeded();
 		}
 
 		private void onMovieSelected(object sender, ItemTappedEventArgs e)
@@ -33,19 +36,9 @@ namespace MovieMania
 
 		private async void onItemAppearing(object sender, ItemVisibilityEventArgs e)
 		{
-			if (shouldUpdate(((Movie)e.Item)))
-			{
-				await moviesViewModel.getNext();
-				System.Diagnostics.Debug.WriteLine("obtendo mais vinte itens");
-			}
-
+			await _moviesViewModel.loadMoviesIfNeeded(((Movie)e.Item));
 		}
 
-		private bool shouldUpdate(Movie movie)
-		{
-			return (!moviesViewModel.isLoading && moviesViewModel.count != 0 && moviesViewModel.isLast(movie));
-		}
-
-		private MoviesViewModel moviesViewModel = null;
+		private IMoviesViewModel _moviesViewModel = null;
 	}
 }
