@@ -16,7 +16,7 @@ namespace MovieMania
 		private const String API_KEY = "TMDB.Key";
 
 
-		public GenreService(TinyRestClient client, IConfigManager configManager) 
+		public GenreService(TinyRestClient client, IConfigManager configManager)
 		{
 			this._restClient = client;
 			this._configManager = configManager;
@@ -37,26 +37,26 @@ namespace MovieMania
 					genres.Add(_genres[id]);
 				}
 			});
-			if(genres.Count == 0)
+			if (genres.Count == 0)
 			{
 				genres.Add("undefined");
 			}
-				return genres;
+			return genres;
 		}
 
-public String getGenre(int id)
-{
-if (_genres.ContainsKey(id))
-{
-			return _genres[id];
+		public String getGenre(int id)
+		{
+			if (_genres.ContainsKey(id))
+			{
+				return _genres[id];
 			}
 			return "undefinned";
-}
+		}
 
 
 
-private async Task updateGenres()
-{
+		private async Task updateGenres()
+		{
 			/*
 			 * If we reached at this point then the list of human readable genres either is not retrieved at all or is too old.
 			 * We must update it. Although the list of genres is unlikely to change, new genres may be added over time. As the amount of data
@@ -68,9 +68,9 @@ private async Task updateGenres()
 			 */
 			await semaphoreSlim.WaitAsync();
 			try
-			{ 
-				if(! mustUpdateGenres())
-					{ // someone else was updating while this thread was waiting
+			{
+				if (!mustUpdateGenres())
+				{ // someone else was updating while this thread was waiting
 					return;
 				}
 				System.Diagnostics.Debug.WriteLine("Updating Genres");
@@ -78,7 +78,7 @@ private async Task updateGenres()
 				Genres genres = await _restClient.GetRequest(_configManager.get(PATH))
 				.AddQueryParameter("api_key", _configManager.get(API_KEY))
 					.ExecuteAsync<Genres>();
-				genres.genres.ForEach (g => d[g.id] = g.name );
+				genres.genres.ForEach(g => d[g.id] = g.name);
 				_genres = d;
 				_dateTime = DateTime.Now;
 			}
@@ -86,12 +86,12 @@ private async Task updateGenres()
 			{
 				semaphoreSlim.Release();
 			}
-}
+		}
 
-private bool mustUpdateGenres()
-{
-			return (_dateTime == DateTime.MinValue|| (DateTime.Now.Subtract(_dateTime).TotalDays >= 1));
-}
+		private bool mustUpdateGenres()
+		{
+			return (_dateTime == DateTime.MinValue || (DateTime.Now.Subtract(_dateTime).TotalDays >= 1));
+		}
 
 		private static SemaphoreSlim semaphoreSlim = new SemaphoreSlim(1, 1);
 		private static Dictionary<int, String> _genres = new Dictionary<int, string>();
@@ -102,7 +102,7 @@ private bool mustUpdateGenres()
 
 		class Genres
 		{
-		public List<Genre> genres { get; set; }
+			public List<Genre> genres { get; set; }
 		}
 	}
 }

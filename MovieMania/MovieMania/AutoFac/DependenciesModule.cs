@@ -20,10 +20,10 @@ namespace MovieMania.AutoFac
 			registerGenreService(builder);
 			registerUpcomingMovieService(builder);
 			builder.RegisterType<MoviesViewModel>().As<IMoviesViewModel>().SingleInstance();
-			}
+		}
 
-			private void registerGenreService(ContainerBuilder builder)
-			{
+		private void registerGenreService(ContainerBuilder builder)
+		{
 			builder.Register(c =>
 			{
 				IConfigManager config = c.Resolve<IConfigManager>();
@@ -32,8 +32,8 @@ namespace MovieMania.AutoFac
 			}).As<IGenreService>().SingleInstance();
 		}
 
-			private void registerUpcomingMovieService(ContainerBuilder builder)
-			{
+		private void registerUpcomingMovieService(ContainerBuilder builder)
+		{
 			builder.Register(c =>
 			{
 				IConfigManager config = c.Resolve<IConfigManager>();
@@ -44,6 +44,6 @@ namespace MovieMania.AutoFac
 				config);
 			}).As<IUpcomingMoviesService>().SingleInstance();
 		}
-		}
-
 	}
+
+}

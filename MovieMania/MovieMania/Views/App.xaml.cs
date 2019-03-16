@@ -37,12 +37,12 @@ namespace MovieMania
 
 
 
-		public  static IContainer Container
+		public static IContainer Container
 		{
-		get
-		{
+			get
+			{
 				return _container;
-		}
+			}
 		}
 
 		private static IContainer _container;

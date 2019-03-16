@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace MovieMania
-	{
+{
 	public class Movie
 	{
 
@@ -27,7 +27,7 @@ namespace MovieMania
 		{
 			get
 			{
-		return String.Join(", ", genresList);
+				return String.Join(", ", genresList);
 			}
 		}
 
@@ -61,6 +61,6 @@ namespace MovieMania
 
 		public List<int> genre_ids { get; set; }
 
-		public List<String> genresList {get; set; }
+		public List<String> genresList { get; set; }
 	}
 }

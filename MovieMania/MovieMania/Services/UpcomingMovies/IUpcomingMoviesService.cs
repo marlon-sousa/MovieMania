@@ -6,6 +6,6 @@ namespace MovieMania
 	interface IUpcomingMoviesService
 	{
 		Task<List<Movie>> getList(int page);
-		int totalPages { get;  }
+		int totalPages { get; }
 	}
 }

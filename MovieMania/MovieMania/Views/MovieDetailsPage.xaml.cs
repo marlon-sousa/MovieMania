@@ -14,12 +14,12 @@ namespace MovieMania
 	{
 		private Movie movie;
 
-		public MovieDetailsPage (Movie movie)
+		public MovieDetailsPage(Movie movie)
 		{
-			InitializeComponent ();
+			InitializeComponent();
 			this.movie = movie;
 		}
-		
+
 		protected override void OnAppearing()
 		{
 			BindingContext = this.movie;

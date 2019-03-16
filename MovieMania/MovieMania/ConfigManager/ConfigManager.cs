@@ -12,8 +12,8 @@ namespace MovieMania
 
 		public static ConfigManager create()
 		{
-		if(_configManager == null)
-		{
+			if (_configManager == null)
+			{
 				string[] resourceNames = App.Current.GetType().Assembly.GetManifestResourceNames();
 
 				foreach (string resourceName in resourceNames)
@@ -27,7 +27,7 @@ namespace MovieMania
 					Dictionary<String, String> configs = JsonConvert.DeserializeObject<Dictionary<String, String>>(jsonString);
 					_configManager = new ConfigManager(configs);
 				}
-		}
+			}
 			return _configManager;
 		}
 
@@ -41,10 +41,10 @@ namespace MovieMania
 
 		public String get(String key, String defaultValue = "")
 		{
-		if (_configs.ContainsKey(key))
-		{
+			if (_configs.ContainsKey(key))
+			{
 				return _configs[key];
-		}
+			}
 			return defaultValue;
 		}
 

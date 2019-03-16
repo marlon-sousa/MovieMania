@@ -11,14 +11,14 @@ namespace MovieMania
 {
 	class MoviesViewModel : IMoviesViewModel
 	{
-	/*
-		public static async Task<MoviesViewModel> createAsync()
-		{
-			MoviesViewModel moviesViewModel = new MoviesViewModel();
-			await moviesViewModel.getMovies();
-			return moviesViewModel;
-		}
-		*/
+		/*
+			public static async Task<MoviesViewModel> createAsync()
+			{
+				MoviesViewModel moviesViewModel = new MoviesViewModel();
+				await moviesViewModel.getMovies();
+				return moviesViewModel;
+			}
+			*/
 
 		public MoviesViewModel(IUpcomingMoviesService upcomingMovies)
 		{
@@ -28,9 +28,9 @@ namespace MovieMania
 
 		public async Task loadMoviesIfNeeded(Movie movie = null)
 		{
-			if(shouldUpdate(movie))
+			if (shouldUpdate(movie))
 			{
-			System.Diagnostics.Debug.WriteLine($"obtendo mais vinte itens. Página {nextPage()}");
+				System.Diagnostics.Debug.WriteLine($"obtendo mais vinte itens. Página {nextPage()}");
 				try
 				{
 					int page = nextPage();
@@ -45,31 +45,31 @@ namespace MovieMania
 				}
 			}
 		}
-		
+
 		public bool isLast(Movie movie)
 		{
-		if(movies.Count ==0)
-		{
-			return true;
-		}
+			if (movies.Count == 0)
+			{
+				return true;
+			}
 			return (null != movie && movie.id == _movies.Last().id);
 		}
 
 		private int nextPage()
 		{
-		if( count == 0)
-		{
+			if (count == 0)
+			{
 				return 1;
-		}
+			}
 			return (count / 20) + 1;
 		}
 
 		private bool shouldUpdate(Movie movie)
 		{
-		if(isLoading || nextPage() > _upcomingMovies.totalPages)
-		{
+			if (isLoading || nextPage() > _upcomingMovies.totalPages)
+			{
 				return false;
-		}
+			}
 
 			return isLast(movie);
 		}
@@ -91,11 +91,12 @@ namespace MovieMania
 			}
 		}
 
-		public ObservableCollection<Movie> movies {
-		get
+		public ObservableCollection<Movie> movies
 		{
+			get
+			{
 				return _movies;
-		}
+			}
 		}
 
 		int _page = 0;
