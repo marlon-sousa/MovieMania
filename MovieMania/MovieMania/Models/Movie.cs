@@ -7,7 +7,7 @@ namespace MovieMania
 	public class Movie
 	{
 
-		private const String imagesUriBase = "https://image.tmdb.org/t/p/w185_and_h278_bestv2";
+		public const String IMAGES_URI_BASE = "https://image.tmdb.org/t/p/w185_and_h278_bestv2";
 		private string _posterPath;
 		private string _backDropPath;
 
@@ -43,7 +43,7 @@ namespace MovieMania
 			}
 			set
 			{
-				_posterPath = (imagesUriBase + value);
+				_posterPath = (IMAGES_URI_BASE + value);
 			}
 		}
 
@@ -55,7 +55,7 @@ namespace MovieMania
 			}
 			set
 			{
-				_backDropPath = (imagesUriBase + value);
+				_backDropPath = (IMAGES_URI_BASE + value);
 			}
 		}
 

@@ -8,12 +8,12 @@ using Tiny.RestClient;
 
 namespace MovieMania
 {
-	class GenreService : IGenreService
+	public class GenreService : IGenreService
 	{
 
-		private const String PATH = "TMDB.GenresURI";
+		public const String PATH = "TMDB.GenresURI";
 
-		private const String API_KEY = "TMDB.Key";
+		public const String API_KEY = "TMDB.Key";
 
 
 		public GenreService(TinyRestClient client, IConfigManager configManager)

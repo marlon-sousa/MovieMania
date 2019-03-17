@@ -9,16 +9,8 @@ using Xamarin.Forms;
 
 namespace MovieMania
 {
-	class MoviesViewModel : IMoviesViewModel
+	public class MoviesViewModel : IMoviesViewModel
 	{
-		/*
-			public static async Task<MoviesViewModel> createAsync()
-			{
-				MoviesViewModel moviesViewModel = new MoviesViewModel();
-				await moviesViewModel.getMovies();
-				return moviesViewModel;
-			}
-			*/
 
 		public MoviesViewModel(IUpcomingMoviesService upcomingMovies)
 		{

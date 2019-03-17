@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace MovieMania
 {
-	interface IUpcomingMoviesService
+	public interface IUpcomingMoviesService
 	{
 		Task<List<Movie>> getList(int page);
 		int totalPages { get; }

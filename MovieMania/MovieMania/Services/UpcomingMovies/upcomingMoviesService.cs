@@ -9,7 +9,7 @@ using Tiny.RestClient;
 namespace MovieMania
 {
 
-	class UpcomingMoviesService : IUpcomingMoviesService
+	public class UpcomingMoviesService : IUpcomingMoviesService
 	{
 		private const String PATH = "TMDB.UpcomingURI";
 
