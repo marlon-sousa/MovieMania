@@ -1,0 +1,6 @@
+{
+	"TMDB.Key": "[your_key]",
+	"TMDB.BaseURL": "https://api.themoviedb.org/3",
+	"TMDB.UpcomingURI": "movie/upcoming",
+	"TMDB.GenresURI": "genre/movie/list"
+}

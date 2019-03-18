@@ -1,0 +1,51 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <Compile Remove="config\debug\**" />
+    <Compile Remove="config\release\**" />
+    <EmbeddedResource Remove="config\debug\**" />
+    <EmbeddedResource Remove="config\release\**" />
+    <None Remove="config\debug\**" />
+    <None Remove="config\release\**" />
+  </ItemGroup>
+
+<ItemGroup>
+    <EmbeddedResource Include="$(MSBuildProjectDirectory)/Config/$(Configuration)/config.json">
+        <LogicalName>ConfigManager.config.json</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="autofac" Version="4.9.1" />
+    <PackageReference Include="tiny.RestClient" Version="1.6.1" />
+    <PackageReference Include="xamarin.forms" Version="3.6.0.220655" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Views\MovieDetailsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Views\App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\MovieDetailsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+  </ItemGroup>
+</Project>

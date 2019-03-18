@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:local="clr-namespace:MovieMania"
+			 x:Class="MovieMania.MainPage"
+			 Title="MovieMania">
+
+	<StackLayout
+	Orientation="Vertical">
+		<ListView x:Name="lvMovies" ItemsSource="{Binding movies}"
+              CachingStrategy="RecycleElement" RowHeight="130">
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<ViewCell>
+						<Grid Padding="5">
+							<Grid.RowDefinitions>
+								<RowDefinition Height="*"></RowDefinition>
+								<RowDefinition Height="*"></RowDefinition>
+								<RowDefinition Height="*"></RowDefinition>
+							</Grid.RowDefinitions>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*"></ColumnDefinition>
+								<ColumnDefinition Width="150"></ColumnDefinition>
+							</Grid.ColumnDefinitions>
+							<Label Grid.Row="0" VerticalOptions="Center" Grid.Column="0" Text="{Binding title}" ></Label>
+							<Label Grid.Row="1" VerticalOptions="Center" Grid.Column="0" Text="{Binding release_date}" ></Label>
+							<Label Grid.Row="2" VerticalOptions="Center" Grid.Column="0" Text="{Binding genre}" ></Label>
+							<Image Grid.Row="0" Grid.RowSpan="3" Grid.Column="1" Source="{Binding backdrop_path}" Aspect="AspectFit"/>
+						</Grid>
+					</ViewCell>
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
+		
+	</StackLayout>
+
+</ContentPage>
