@@ -31,9 +31,7 @@
 				</DataTemplate>
 			</ListView.ItemTemplate>
 		</ListView>
-		<Label Text="Welcome to Xamarin.Forms!" 
-		   HorizontalOptions="Center"
-		   VerticalOptions="End" />
+		
 	</StackLayout>
 
 </ContentPage>
