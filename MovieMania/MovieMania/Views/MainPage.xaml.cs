@@ -19,13 +19,24 @@ namespace MovieMania
 
 		protected override async void OnAppearing()
 		{
+
 			if (_moviesViewModel == null)
 			{
 				_moviesViewModel = App.Container.Resolve<IMoviesViewModel>();
 				BindingContext = _moviesViewModel;
 			}
 
-			await _moviesViewModel.loadMoviesIfNeeded();
+			try
+			{
+				await _moviesViewModel.loadMoviesIfNeeded();
+			}
+			catch (Exception ex)
+			{ // failed to query movies
+				if (_moviesViewModel.count == 0)
+				{
+					await DisplayAlert("Error", "Unable to query list of upcoming movies.\n Please try again in some minuts", "Ok");
+				}
+			}
 		}
 
 		private void onMovieSelected(object sender, ItemTappedEventArgs e)
@@ -34,9 +45,16 @@ namespace MovieMania
 			Navigation.PushAsync(page);
 		}
 
-		private async void onItemAppearing(object sender, ItemVisibilityEventArgs e)
+			private async void onItemAppearing(object sender, ItemVisibilityEventArgs e)
 		{
-			await _moviesViewModel.loadMoviesIfNeeded(((Movie)e.Item));
+			try
+			{
+				await _moviesViewModel.loadMoviesIfNeeded(((Movie)e.Item));
+			}
+			catch (Exception ex)
+			{
+				// we have failed to query movies, but the list already contains items. Fail silently.
+			}
 		}
 
 		private IMoviesViewModel _moviesViewModel = null;

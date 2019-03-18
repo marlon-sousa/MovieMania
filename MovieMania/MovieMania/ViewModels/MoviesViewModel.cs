@@ -15,14 +15,12 @@ namespace MovieMania
 		public MoviesViewModel(IUpcomingMoviesService upcomingMovies)
 		{
 			this._upcomingMovies = upcomingMovies;
-			System.Diagnostics.Debug.WriteLine("MoviesViewModel created");
 		}
 
 		public async Task loadMoviesIfNeeded(Movie movie = null)
 		{
 			if (shouldUpdate(movie))
 			{
-				System.Diagnostics.Debug.WriteLine($"obtendo mais vinte itens. Página {nextPage()}");
 				try
 				{
 					int page = nextPage();

@@ -13,7 +13,6 @@ namespace MovieMania
 		public App()
 		{
 			InitializeComponent();
-
 			var builder = new ContainerBuilder();
 			builder.RegisterModule(new DependenciesModule());
 			_container = builder.Build();

@@ -15,7 +15,7 @@ namespace MovieMania
 		{
 			get
 			{
-				if (genresList.Count > 0)
+				if (null != genresList && genresList.Count > 0)
 				{
 					return genresList[0];
 				}
@@ -27,7 +27,11 @@ namespace MovieMania
 		{
 			get
 			{
-				return String.Join(", ", genresList);
+				if (null != genresList)
+				{
+					return String.Join(", ", genresList);
+				}
+				return "undefined";
 			}
 		}
 

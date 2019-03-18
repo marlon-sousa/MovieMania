@@ -20,7 +20,6 @@ namespace MovieMania
 		{
 			this._restClient = client;
 			this._configManager = configManager;
-			System.Diagnostics.Debug.WriteLine("GenreService created");
 		}
 
 		public async Task<List<String>> getGenresFromIds(List<int> ids)
@@ -50,7 +49,7 @@ namespace MovieMania
 			{
 				return _genres[id];
 			}
-			return "undefinned";
+			return "undefined";
 		}
 
 
@@ -73,7 +72,6 @@ namespace MovieMania
 				{ // someone else was updating while this thread was waiting
 					return;
 				}
-				System.Diagnostics.Debug.WriteLine("Updating Genres");
 				Dictionary<int, String> d = new Dictionary<int, string>();
 				Genres genres = await _restClient.GetRequest(_configManager.get(PATH))
 				.AddQueryParameter("api_key", _configManager.get(API_KEY))
@@ -81,6 +79,12 @@ namespace MovieMania
 				genres.genres.ForEach(g => d[g.id] = g.name);
 				_genres = d;
 				_dateTime = DateTime.Now;
+			}
+			catch (Exception ex)
+			{
+				// fail silently. My suggestion is to let the app run showing, by the time, undefined as genre.
+				// This will happen of course if only the genres end point isn't available. If the api as a whole is not working then
+				// this code won't even run.
 			}
 			finally
 			{

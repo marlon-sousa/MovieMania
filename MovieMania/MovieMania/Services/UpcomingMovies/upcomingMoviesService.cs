@@ -1,4 +1,4 @@
-﻿using MovieMania.Services.UpcomingMovies;
+﻿using MovieMania;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -11,16 +11,15 @@ namespace MovieMania
 
 	public class UpcomingMoviesService : IUpcomingMoviesService
 	{
-		private const String PATH = "TMDB.UpcomingURI";
+		public const String PATH = "TMDB.UpcomingURI";
 
-		private const String API_KEY = "TMDB.Key";
+		public const String API_KEY = "TMDB.Key";
 
 		public UpcomingMoviesService(TinyRestClient client, IGenreService genreService, IConfigManager configManager)
 		{
 			this._genreService = genreService;
 			this._restClient = client;
 			this._configManager = configManager;
-			System.Diagnostics.Debug.WriteLine("UpcomingMoviesService created");
 		}
 
 		public async Task<List<Movie>> getList(int page)
@@ -59,10 +58,5 @@ namespace MovieMania
 		private IConfigManager _configManager;
 		private int _totalPages = 1;
 
-		class UpcomingMovies
-		{
-			public List<Movie> results { get; set; }
-			public int total_pages { get; set; }
-		}
 	}
 }

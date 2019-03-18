@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MovieMania.Services.UpcomingMovies
+namespace MovieMania
 {
-	class LastPageException : Exception
+	public class LastPageException : Exception
 	{
 		public LastPageException()
 		{

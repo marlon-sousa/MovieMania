@@ -10,23 +10,12 @@ namespace MovieMania
 	public class ConfigManager : IConfigManager
 	{
 
-		public static ConfigManager create()
+		public static ConfigManager create(String jsonString)
 		{
 			if (_configManager == null)
 			{
-				string[] resourceNames = App.Current.GetType().Assembly.GetManifestResourceNames();
-
-				foreach (string resourceName in resourceNames)
-				{
-					System.Diagnostics.Trace.WriteLine(resourceName);
-				}
-				Stream embeddedResourceStream = App.Current.GetType().Assembly.GetManifestResourceStream("ConfigManager.config.json");
-				using (StreamReader streamReader = new StreamReader(embeddedResourceStream))
-				{
-					String jsonString = streamReader.ReadToEnd();
-					Dictionary<String, String> configs = JsonConvert.DeserializeObject<Dictionary<String, String>>(jsonString);
-					_configManager = new ConfigManager(configs);
-				}
+				Dictionary<String, String> configs = JsonConvert.DeserializeObject<Dictionary<String, String>>(jsonString);
+				_configManager = new ConfigManager(configs);
 			}
 			return _configManager;
 		}
@@ -36,7 +25,6 @@ namespace MovieMania
 		private ConfigManager(Dictionary<string, string> configs)
 		{
 			_configs = configs;
-			System.Diagnostics.Debug.WriteLine("ConfigManager created");
 		}
 
 		public String get(String key, String defaultValue = "")
